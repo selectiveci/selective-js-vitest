@@ -1,0 +1,71 @@
+name: test
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    name: node ${{ matrix.node }} vitest ${{ matrix.vitest }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22, 24, 26]
+        vitest: ["4.1", "5.0"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/selective-transport/bin
+          key: transport-44a9c7abde5a35d869c5f71780d56e26c0c6f8bd-${{ runner.os }}
+      - name: Build pinned transport
+        run: |
+          if [ ! -x /tmp/selective-transport/bin/transport-conformance ]; then
+            CARGO_TARGET_DIR=/tmp/selective-transport-target cargo install --locked --git https://github.com/selectiveci/transport \
+              --rev 44a9c7abde5a35d869c5f71780d56e26c0c6f8bd --bin transport --bin transport-conformance --root /tmp/selective-transport
+          fi
+          sha256sum /tmp/selective-transport/bin/transport /tmp/selective-transport/bin/transport-conformance
+      - run: npm ci
+      - run: npx -y npm@11 install --no-save vitest@~${{ matrix.vitest }}.0 @vitest/coverage-v8@~${{ matrix.vitest }}.0
+      - run: node -p "'vitest ' + require('vitest/package.json').version + ', coverage-v8 ' + require('@vitest/coverage-v8/package.json').version"
+      - run: npm test
+        env:
+          SELECTIVE_TRANSPORT: /tmp/selective-transport/bin/transport
+      - run: tests/conformance.sh
+        env:
+          SELECTIVE_TRANSPORT: /tmp/selective-transport/bin/transport
+  pools:
+    name: pool ${{ matrix.pool }} vitest ${{ matrix.vitest }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        pool: [forks, threads, vmThreads, vmForks]
+        vitest: ["4.1", "5.0"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/selective-transport/bin
+          key: transport-44a9c7abde5a35d869c5f71780d56e26c0c6f8bd-${{ runner.os }}
+      - name: Build pinned transport
+        run: |
+          if [ ! -x /tmp/selective-transport/bin/transport-conformance ]; then
+            CARGO_TARGET_DIR=/tmp/selective-transport-target cargo install --locked --git https://github.com/selectiveci/transport \
+              --rev 44a9c7abde5a35d869c5f71780d56e26c0c6f8bd --bin transport --bin transport-conformance --root /tmp/selective-transport
+          fi
+          sha256sum /tmp/selective-transport/bin/transport /tmp/selective-transport/bin/transport-conformance
+      - run: npm ci
+      - run: npx -y npm@11 install --no-save vitest@~${{ matrix.vitest }}.0 @vitest/coverage-v8@~${{ matrix.vitest }}.0
+      - run: node -p "'vitest ' + require('vitest/package.json').version + ', coverage-v8 ' + require('@vitest/coverage-v8/package.json').version"
+      - run: node --test --test-concurrency=1 --test-timeout=300000 tests/vitest-e2e.test.js
+        env:
+          SELECTIVE_TRANSPORT: /tmp/selective-transport/bin/transport
+          VITEST_POOL: ${{ matrix.pool }}

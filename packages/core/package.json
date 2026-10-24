@@ -1,0 +1,17 @@
+{
+  "name": "@selectiveci/core",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Selective session loop and transport --stdio sidecar. This package is the JavaScript core that PLAN.md calls selective-js-core. It lives in this workspace until that repository exists.",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+  },
+  "files": [
+    "src"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@selectiveci/vitest",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Selective Vitest adapter. Depends on the workspace core package, which stands in for selective-js-core until that repository exists.",
+  "license": "MIT",
+  "bin": {
+    "selective": "./src/cli.js"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@selectiveci/core": "0.1.0"
+  },
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+  },
+  "peerDependencies": {
+    "vitest": "^4.1.1 || ^5.0.0"
+  },
+  "files": [
+    "src"
+  ]
+}

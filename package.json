@@ -1,0 +1,20 @@
+{
+  "name": "selective-js-vitest",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "fixtures/*"
+  ],
+  "scripts": {
+    "test": "node --test --test-concurrency=1 --test-timeout=300000 tests/*.test.js"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^5.0.5",
+    "vitest": "^5.0.5",
+    "ws": "^8.18.3"
+  },
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+  }
+}

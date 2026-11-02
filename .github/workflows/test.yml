@@ -20,12 +20,12 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: /tmp/selective-transport/bin
-          key: transport-44a9c7abde5a35d869c5f71780d56e26c0c6f8bd-${{ runner.os }}
+          key: transport-v0.2.0-${{ runner.os }}
       - name: Build pinned transport
         run: |
           if [ ! -x /tmp/selective-transport/bin/transport-conformance ]; then
             CARGO_TARGET_DIR=/tmp/selective-transport-target cargo install --locked --git https://github.com/selectiveci/transport \
-              --rev 44a9c7abde5a35d869c5f71780d56e26c0c6f8bd --bin transport --bin transport-conformance --root /tmp/selective-transport
+              --tag v0.2.0 --bin transport --bin transport-conformance --root /tmp/selective-transport
           fi
           sha256sum /tmp/selective-transport/bin/transport /tmp/selective-transport/bin/transport-conformance
       - run: npm ci
@@ -54,12 +54,12 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: /tmp/selective-transport/bin
-          key: transport-44a9c7abde5a35d869c5f71780d56e26c0c6f8bd-${{ runner.os }}
+          key: transport-v0.2.0-${{ runner.os }}
       - name: Build pinned transport
         run: |
           if [ ! -x /tmp/selective-transport/bin/transport-conformance ]; then
             CARGO_TARGET_DIR=/tmp/selective-transport-target cargo install --locked --git https://github.com/selectiveci/transport \
-              --rev 44a9c7abde5a35d869c5f71780d56e26c0c6f8bd --bin transport --bin transport-conformance --root /tmp/selective-transport
+              --tag v0.2.0 --bin transport --bin transport-conformance --root /tmp/selective-transport
           fi
           sha256sum /tmp/selective-transport/bin/transport /tmp/selective-transport/bin/transport-conformance
       - run: npm ci

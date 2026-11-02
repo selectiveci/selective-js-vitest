@@ -6,7 +6,7 @@ Selective client for Vitest. The process you launch is a sidecar: it speaks newl
 
 ## Run
 
-Node 20, 22, or 24 and later. Vitest `^4.1.1` or `^5`. The packed `@selectiveci/core` lists one optional transport package per platform: `@selectiveci/transport-linux-x64`, `-linux-arm64`, `-darwin-x64` and `-darwin-arm64`. npm installs the one that matches, and `selective` runs its `bin/transport`. The Linux binary is statically linked against musl, so it runs on glibc and Alpine images. `SELECTIVE_TRANSPORT` overrides it with any `transport` binary (this slice is pinned to transport commit `44a9c7abde5a35d869c5f71780d56e26c0c6f8bd`). `SELECTIVE_WS_PING_INTERVAL_MS` and `SELECTIVE_WS_PONG_TIMEOUT_MS` are forwarded to that child.
+Node 20, 22, or 24 and later. Vitest `^4.1.1` or `^5`. The packed `@selectiveci/core` lists one optional transport package per platform: `@selectiveci/transport-linux-x64`, `-linux-arm64`, `-darwin-x64` and `-darwin-arm64`. npm installs the one that matches, and `selective` runs its `bin/transport`. The Linux binary is statically linked against musl, so it runs on glibc and Alpine images. `SELECTIVE_TRANSPORT` overrides it with any `transport` binary (this slice is pinned to transport release `v0.2.0`). `SELECTIVE_WS_PING_INTERVAL_MS` and `SELECTIVE_WS_PONG_TIMEOUT_MS` are forwarded to that child.
 
 ```bash
 npm install -D vitest @selectiveci/vitest

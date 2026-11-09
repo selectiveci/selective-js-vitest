@@ -328,7 +328,7 @@ class VitestAdapter {
       !this.execMode &&
       !process.env.NODE_V8_COVERAGE &&
       !(coverage.enabled && coverage.provider === "v8") &&
-      !this.vitest.projects.some((project) => project.config.browser?.enabled);
+      !this.vitest.projects.some((project) => project.config.browser.enabled);
   }
 
   namePattern() {
@@ -452,6 +452,7 @@ function ancestorErrors(testCase) {
   return errors;
 }
 
+/** @param {import("vitest/node").TestModule} mod */
 function moduleHookErrors(mod) {
   return [mod, ...mod.children.allSuites()].flatMap((entity) => entity.errors());
 }

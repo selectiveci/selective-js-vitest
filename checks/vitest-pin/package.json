@@ -1,0 +1,8 @@
+{
+  "name": "vitest-types-pin",
+  "private": true,
+  "description": "Exact vitest@4.1.1, the peerDependency floor, so checkJs sees the types the adapter is allowed to rely on. Not imported at runtime.",
+  "dependencies": {
+    "vitest": "4.1.1"
+  }
+}

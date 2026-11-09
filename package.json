@@ -7,10 +7,14 @@
     "fixtures/*"
   ],
   "scripts": {
-    "test": "node --test --test-concurrency=1 --test-timeout=300000 tests/*.test.js"
+    "test": "node --test --test-concurrency=1 --test-timeout=300000 tests/*.test.js",
+    "check": "node scripts/check-guards.mjs"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^5.0.5",
+    "eslint": "^10.13.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
     "vitest": "^5.0.5",
     "ws": "^8.18.3"
   },

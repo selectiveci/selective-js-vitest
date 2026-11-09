@@ -1,5 +1,4 @@
 import tseslint from "typescript-eslint";
-import noDefensiveVitest from "./tools/no-defensive-vitest.js";
 
 const EMPTY_CATCH =
   "Empty catch swallows the error. Delete the try/catch. child.kill() with a valid signal does not throw, and spawn()/openStdio() report a missing binary as an 'error' event. If the call can throw, handle that error in the catch body.";
@@ -74,14 +73,10 @@ export default [
       },
     },
     plugins: {
-      selective: {
-        rules: {
-          "no-defensive-vitest": noDefensiveVitest,
-        },
-      },
+      "@typescript-eslint": tseslint.plugin,
     },
     rules: {
-      "selective/no-defensive-vitest": "error",
+      "@typescript-eslint/no-unnecessary-condition": "error",
     },
   },
 ];

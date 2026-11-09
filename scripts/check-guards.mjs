@@ -13,7 +13,7 @@ const redFiles = [
   ["checks/fixtures/catch/red/kill.js", ["`void 0` is an empty catch", "Empty catch swallows"]],
   [
     "checks/fixtures/vitest/red/module-hooks.js",
-    ["Call it directly. vitest@4.1.1", "errors()", "Drop `??`", "testModules"],
+    ["Unnecessary optional chain on a non-nullish value", "expected left-hand side of `??` operator"],
   ],
 ];
 

@@ -8,9 +8,8 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ES2022",
-    "baseUrl": ".",
     "paths": {
-      "vitest/node": ["checks/vitest-pin/node_modules/vitest/dist/node.d.ts"]
+      "vitest/node": ["./checks/vitest-pin/node_modules/vitest/dist/node.d.ts"]
     }
   },
   "include": [

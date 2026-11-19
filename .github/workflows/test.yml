@@ -3,8 +3,8 @@ on:
   push:
   pull_request:
 env:
-  TRANSPORT_RELEASE: v0.2.0
-  TRANSPORT_REV: 553bb45b8bfa3ac9c9f7ed1ad71a8ac19d384542
+  TRANSPORT_RELEASE: v0.3.0
+  TRANSPORT_REV: a447773203dc5e778e5f0ef0bccd255e70c29938
 jobs:
   test:
     name: node ${{ matrix.node }} vitest ${{ matrix.vitest }}

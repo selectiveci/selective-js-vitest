@@ -12,4 +12,4 @@ node "$root/packages/vitest/src/cli.js" exec vitest --config "$root/tests/suppor
     console.log(JSON.stringify({ pass: byName.passes, fail: byName.fails, pending: byName.pends, flaky: byName.flake, before_all_seconds: 0.5 }));
   ' > "$ids"
 cd "$root"
-"$conformance" run --client "$root/tests/support/conformance-client.sh" --fixture-ids "$ids" --transport "$transport"
+"$conformance" run --require-features manifest_http --client "$root/tests/support/conformance-client.sh" --fixture-ids "$ids" --transport "$transport"
